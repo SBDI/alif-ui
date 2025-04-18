@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { Logo } from "./logo";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { ModeToggle } from "./mode-toggle";
+import Image from "next/image";
 
 const menuItems = [
   { name: "Features", href: "#link" },
@@ -29,7 +29,8 @@ export const HeroHeader = () => {
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
-                <Logo />
+                {/* <Image src="/alif-logo.svg" alt="Alif Logo" width={32} height={32} className="size-8" /> */}
+                <span className="text-xl font-semibold">Alif</span>
               </Link>
 
               <button
