@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "@/components/marketing/mode-toggle";
 import Image from "next/image";
 
 const menuItems = [
