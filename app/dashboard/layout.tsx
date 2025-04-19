@@ -5,13 +5,12 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // You'll likely need auth checks here eventually
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto"> {/* Main content area, scrollable */}
+      <main className="flex-1 overflow-y-auto pt-6"> {/* Main content area, scrollable */}
         {children}
       </main>
     </div>
   );
-} 
+}
