@@ -11,11 +11,13 @@ import {
   FileText, // Placeholder for Knowledge
   Settings, // Placeholder for Settings
   LogOut,   // Placeholder for Logout
+  PlusCircle, // Icon for New Quiz
   // Add other icons as needed
 } from 'lucide-react';
 
 const mainNavItems = [
   { href: '/dashboard', label: 'Home', icon: Home },
+  { href: '/dashboard/quiz/new', label: 'New Quiz', icon: PlusCircle },
   // Add other main navigation items here
 ];
 
