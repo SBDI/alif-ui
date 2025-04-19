@@ -1,12 +1,12 @@
 import React from 'react';
-import MarketingHeader from '../../components/marketing/marketing-header'; // Corrected import
-import MarketingFooter from '../../components/marketing/marketing-footer'; // Corrected import
+import { HeroHeader } from '@/components/marketing/marketing-header';
+import MarketingFooter from '@/components/marketing/marketing-footer';
 
 // Basic layout structure - will add Header/Footer later
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <MarketingHeader />
+      <HeroHeader />
       <main>{children}</main>
       <MarketingFooter />
     </>
