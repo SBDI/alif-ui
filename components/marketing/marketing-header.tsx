@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { ModeToggle } from "@/components/marketing/mode-toggle";
+import { ModeToggle } from "@/components/shared/mode-toggle";
 import Image from "next/image";
 
 const menuItems = [
@@ -29,8 +29,8 @@ export const HeroHeader = () => {
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
-                {/* <Image src="/alif-logo.svg" alt="Alif Logo" width={32} height={32} className="size-8" /> */}
-                <span className="text-xl font-semibold">Alif</span>
+                <Image src="/alif-logo.svg" alt="Alif Logo" width={32} height={32} className="size-8" />
+                <span className="text-xl font-semibold">Alif AI</span>
               </Link>
 
               <button

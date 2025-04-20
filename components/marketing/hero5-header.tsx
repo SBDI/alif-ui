@@ -30,7 +30,7 @@ export const HeroHeader = () => {
                 className="flex items-center space-x-2"
               >
                 <Image src="/alif-logo.svg" alt="Alif Logo" width={32} height={32} className="size-8" />
-                <span className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Alif</span>
+                <span className="text-xl font-semibold">Alif AI</span>
               </Link>
 
               <button
@@ -92,4 +92,4 @@ export const HeroHeader = () => {
       </nav>
     </header>
   );
-}; 
+};

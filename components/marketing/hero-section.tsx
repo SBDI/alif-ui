@@ -44,9 +44,9 @@ export default function HeroSection() {
                             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                                 <AnimatedGroup variants={transitionVariants}>
                                     <Link
-                                        href="#link"
+                                        href="/dashboard"
                                         className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
-                                        <span className="text-foreground text-sm">Introducing Support for AI Models</span>
+                                        <span className="text-foreground text-sm">Your AI Learning Partner is Here!</span>
                                         <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
                                         <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
@@ -67,7 +67,7 @@ export default function HeroSection() {
                                     speedSegment={0.3}
                                     as="h1"
                                     className="mt-8 text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                                    Modern Solutions for Customer Engagement
+                                    Unlock Your Learning Potential with Alif
                                 </TextEffect>
                                 <TextEffect
                                     per="line"
@@ -76,7 +76,7 @@ export default function HeroSection() {
                                     delay={0.5}
                                     as="p"
                                     className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                                    Highly customizable components for building modern websites and applications that look and feel the way you mean it.
+                                    Your personalized AI study partner for deeper understanding and better grades.
                                 </TextEffect>
 
                                 <AnimatedGroup
@@ -99,8 +99,8 @@ export default function HeroSection() {
                                             asChild
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
-                                            <Link href="#link">
-                                                <span className="text-nowrap">Start Building</span>
+                                            <Link href="/dashboard">
+                                                <span className="text-nowrap">Start Learning</span>
                                             </Link>
                                         </Button>
                                     </div>
@@ -136,8 +136,14 @@ export default function HeroSection() {
                                     className="bg-linear-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                                 />
                                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                                        <p className="text-muted-foreground text-sm">[App Screenshot Placeholder]</p>
+                                    <div className="aspect-video rounded-lg overflow-hidden">
+                                        <Image
+                                            src="/app-screen.png"
+                                            alt="Alif UI Application Screenshot"
+                                            width={1200}
+                                            height={675}
+                                            className="w-full h-full object-cover"
+                                        />
                                     </div>
                                 </div>
                             </div>

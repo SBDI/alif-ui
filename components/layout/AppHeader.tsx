@@ -3,26 +3,26 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { 
-  Search, 
-  Bell, 
-  User, 
-  LogOut, 
-  Settings, 
-  HelpCircle, 
+import {
+  Search,
+  Bell,
+  User,
+  LogOut,
+  Settings,
+  HelpCircle,
   Command,
   Plus
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuGroup, 
-  DropdownMenuItem, 
-  DropdownMenuLabel, 
-  DropdownMenuSeparator, 
-  DropdownMenuTrigger 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
@@ -44,13 +44,17 @@ export function AppHeader({ onOpenCommandMenu }: AppHeaderProps) {
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6">
-      <form onSubmit={handleSearch} className="flex-1 md:flex-initial md:w-64 lg:w-96">
-        <div className="relative">
+      <div className="w-1/4 flex items-center">
+        {/* Left section - can be used for logo or other elements */}
+      </div>
+
+      <form onSubmit={handleSearch} className="flex-1 flex justify-center">
+        <div className="relative w-full max-w-md">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
             placeholder="Search..."
-            className="w-full bg-background pl-8 md:w-64 lg:w-96"
+            className="w-full bg-background pl-8"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -60,20 +64,20 @@ export function AppHeader({ onOpenCommandMenu }: AppHeaderProps) {
         </div>
       </form>
 
-      <div className="flex flex-1 items-center justify-end gap-4">
-        <Button 
-          variant="outline" 
-          size="sm" 
+      <div className="w-1/4 flex items-center justify-end gap-4">
+        <Button
+          variant="outline"
+          size="sm"
           className="hidden md:flex gap-2"
-          onClick={() => router.push('/folders/new')}
+          onClick={() => router.push('/dashboard/new-space')}
         >
           <Plus className="h-4 w-4" />
-          <span>New Folder</span>
+          <span>New Activity</span>
         </Button>
 
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           className="relative"
           onClick={onOpenCommandMenu}
         >

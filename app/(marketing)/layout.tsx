@@ -4,8 +4,8 @@ import { HeroHeader } from '@/components/marketing/hero5-header';
 import MarketingFooter from '@/components/marketing/marketing-footer';
 
 export const metadata: Metadata = {
-  title: "Alif UI - AI-Powered Learning Platform",
-  description: "Alif UI is an AI-powered learning platform that helps students learn more effectively.",
+  title: "Alif - AI-Powered Learning Platform",
+  description: "Alif is an AI-powered learning platform that helps students learn more effectively.",
 };
 
 export default function RootMarketingLayout({

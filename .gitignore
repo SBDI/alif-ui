@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-# Cursor rules
-.cursorrules
+# Cursor rules folder
+.cursor/
 # dependencies
 /node_modules
 /.pnp

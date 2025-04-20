@@ -112,7 +112,7 @@ export function Sidebar({ expanded, onToggle }: SidebarProps) { // Use props
       )}>
         <Link href="/dashboard" className={cn("flex items-center", !expanded && "justify-center w-full")} aria-label="Dashboard">
           <Image src="/alif-logo.svg" alt="Alif Logo" width={24} height={24} className="size-6 flex-shrink-0" />
-          {expanded && <span className="ml-2 font-semibold text-lg whitespace-nowrap">Alif</span>}
+          {expanded && <span className="ml-2 font-semibold text-lg whitespace-nowrap">Alif AI</span>}
         </Link>
         {/* Removed inline expand/collapse button from here */}
       </div>

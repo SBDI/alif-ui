@@ -17,14 +17,14 @@ export default function DashboardHome() {
         <Button variant="outline" className="flex items-center gap-2 px-6 py-5 rounded-full" asChild>
           <Link href="/dashboard/new-space">
             <Plus className="h-4 w-4" />
-            <span>New space</span>
+            <span>New Activity</span>
           </Link>
         </Button>
       </div>
 
       <div className="mb-8">
         <Link href="/folders/1/chat">
-          <Card className="border-dashed hover:border-solid hover:border-primary/50 transition-all cursor-pointer">
+          <Card className="border-dashed hover:border-solid hover:border-primary/50 transition-all cursor-pointer bg-card/50">
             <CardContent className="p-6 flex items-center gap-3">
               <MessageSquare className="h-5 w-5 text-primary" />
               <span className="font-medium">Chat with AI</span>
@@ -37,7 +37,7 @@ export default function DashboardHome() {
         <h2 className="text-xl font-medium mb-4">Studying</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link href="/dashboard/study/guide">
-            <Card className="hover:shadow-md transition-all cursor-pointer">
+            <Card className="hover:shadow-md transition-all cursor-pointer bg-card/50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-2">
                   <BookOpen className="h-5 w-5 text-primary mb-2" />
@@ -49,7 +49,7 @@ export default function DashboardHome() {
           </Link>
 
           <Link href="/dashboard/study/quiz">
-            <Card className="hover:shadow-md transition-all cursor-pointer">
+            <Card className="hover:shadow-md transition-all cursor-pointer bg-card/50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-2">
                   <ListChecks className="h-5 w-5 text-primary mb-2" />
@@ -61,7 +61,7 @@ export default function DashboardHome() {
           </Link>
 
           <Link href="/dashboard/study/flashcards">
-            <Card className="hover:shadow-md transition-all cursor-pointer">
+            <Card className="hover:shadow-md transition-all cursor-pointer bg-card/50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-2">
                   <FlashIcon className="h-5 w-5 text-primary mb-2" />
@@ -78,7 +78,7 @@ export default function DashboardHome() {
         <h2 className="text-xl font-medium mb-4">Homework</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Link href="/dashboard/homework/solve">
-            <Card className="hover:shadow-md transition-all cursor-pointer">
+            <Card className="hover:shadow-md transition-all cursor-pointer bg-card/50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-2">
                   <ListChecks className="h-5 w-5 text-primary mb-2" />
@@ -90,7 +90,7 @@ export default function DashboardHome() {
           </Link>
 
           <Link href="/dashboard/homework/write">
-            <Card className="hover:shadow-md transition-all cursor-pointer">
+            <Card className="hover:shadow-md transition-all cursor-pointer bg-card/50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-2">
                   <PenLine className="h-5 w-5 text-primary mb-2" />
