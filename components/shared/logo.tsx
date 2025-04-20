@@ -31,4 +31,4 @@ export const LogoStroke = ({ className }: { className?: string }) => {
             />
         </svg>
     )
-}
+} 

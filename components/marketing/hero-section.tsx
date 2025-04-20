@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { TextEffect } from '@/components/ui/text-effect'
 import { AnimatedGroup } from '@/components/ui/animated-group'
-import { HeroHeader } from '@/components/marketing/marketing-header'
 
 const transitionVariants = {
     item: {
@@ -30,7 +29,6 @@ const transitionVariants = {
 export default function HeroSection() {
     return (
         <>
-            <HeroHeader />
             <main className="overflow-hidden">
                 <div
                     aria-hidden
@@ -41,40 +39,6 @@ export default function HeroSection() {
                 </div>
                 <section>
                     <div className="relative pt-24 md:pt-36">
-                        <AnimatedGroup
-                            variants={{
-                                container: {
-                                    visible: {
-                                        transition: {
-                                            delayChildren: 1,
-                                        },
-                                    },
-                                },
-                                item: {
-                                    hidden: {
-                                        opacity: 0,
-                                        y: 20,
-                                    },
-                                    visible: {
-                                        opacity: 1,
-                                        y: 0,
-                                        transition: {
-                                            type: 'spring',
-                                            bounce: 0.3,
-                                            duration: 2,
-                                        },
-                                    },
-                                },
-                            }}
-                            className="absolute inset-0 -z-20">
-                            <Image
-                                alt="Night background"
-                                width={2350}
-                                height={1357}
-                                className="-z-10 w-full max-w-none opacity-60 dark:hidden"
-                                src="/app-screen.png"
-                            />
-                        </AnimatedGroup>
                         <div className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"></div>
                         <div className="mx-auto max-w-7xl px-6">
                             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
@@ -103,7 +67,7 @@ export default function HeroSection() {
                                     speedSegment={0.3}
                                     as="h1"
                                     className="mt-8 text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                                    Study Smarter, Not Harder with Alif
+                                    Modern Solutions for Customer Engagement
                                 </TextEffect>
                                 <TextEffect
                                     per="line"
@@ -112,7 +76,7 @@ export default function HeroSection() {
                                     delay={0.5}
                                     as="p"
                                     className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                                    Your personal AI study assistant. Generate quizzes, summarize notes, and understand complex topics faster than ever.
+                                    Highly customizable components for building modern websites and applications that look and feel the way you mean it.
                                 </TextEffect>
 
                                 <AnimatedGroup
@@ -136,7 +100,7 @@ export default function HeroSection() {
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
                                             <Link href="#link">
-                                                <span className="text-nowrap">Get Started Free</span>
+                                                <span className="text-nowrap">Start Building</span>
                                             </Link>
                                         </Button>
                                     </div>
@@ -147,7 +111,7 @@ export default function HeroSection() {
                                         variant="ghost"
                                         className="h-10.5 rounded-xl px-5">
                                         <Link href="#link">
-                                            <span className="text-nowrap">Learn More</span>
+                                            <span className="text-nowrap">Request a demo</span>
                                         </Link>
                                     </Button>
                                 </AnimatedGroup>
@@ -171,21 +135,10 @@ export default function HeroSection() {
                                     aria-hidden
                                     className="bg-linear-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                                 />
-                                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto flex max-w-6xl justify-center overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                                    <Image
-                                        alt="Mail application frame"
-                                        width={1024}
-                                        height={683}
-                                        className="dark:hidden"
-                                        src="/app-screen.png"
-                                    />
-                                    <Image
-                                        alt="Mail application frame Light"
-                                        width={1024}
-                                        height={683}
-                                        className="hidden dark:block"
-                                        src="/app-screen.png"
-                                    />
+                                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
+                                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                                        <p className="text-muted-foreground text-sm">[App Screenshot Placeholder]</p>
+                                    </div>
                                 </div>
                             </div>
                         </AnimatedGroup>
