@@ -24,4 +24,27 @@ export interface QuizResult {
   parameters: QuizParameters;
   questions: Question[];
   createdAt: string;
+}
+
+// Placeholder for Quiz feature specific types
+
+export interface QuizSettings {
+  numQuestions: number;
+  difficulty: 'easy' | 'medium' | 'hard';
+  topics?: string[];
+  // Add other relevant settings
+}
+
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  answer: string;
+  explanation?: string;
+}
+
+export interface QuizResult {
+  score: number;
+  totalQuestions: number;
+  // Add detailed results if needed
 } 

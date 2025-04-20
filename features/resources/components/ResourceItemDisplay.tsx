@@ -5,12 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Resource } from "../types";
-import { FileText, Link as LinkIcon, Database, UploadCloud, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { FileText, Link as LinkIcon, Database, UploadCloud, AlertCircle, CheckCircle, Loader2, FolderPlus, Trash2 } from 'lucide-react';
 
 interface ResourceItemDisplayProps {
   resource: Resource;
   onDelete?: (id: string) => void; // Optional delete handler
   onRetry?: (id: string) => void; // Optional retry handler
+  className?: string;
 }
 
 // Helper to get appropriate icon based on resource type
@@ -30,7 +31,7 @@ const getIcon = (type: string) => {
   }
 };
 
-export const ResourceItemDisplay: React.FC<ResourceItemDisplayProps> = ({ resource, onDelete, onRetry }) => {
+export const ResourceItemDisplay: React.FC<ResourceItemDisplayProps> = ({ resource, onDelete, onRetry, className }) => {
   const { id, name, type, status, progress } = resource;
 
   const renderStatus = () => {
@@ -56,28 +57,26 @@ export const ResourceItemDisplay: React.FC<ResourceItemDisplayProps> = ({ resour
   };
 
   return (
-    <Card>
-      <CardHeader className="p-4">
-        <div className="flex items-center gap-3">
-          {getIcon(type)}
-          <CardTitle className="text-sm font-medium truncate flex-1" title={name}>{name}</CardTitle>
+    <div className={cn("border rounded-lg p-4 flex items-center justify-between gap-4", className)}>
+      <div className="flex items-center gap-3 flex-grow min-w-0">
+        {getIcon(type)}
+        <div className="flex-grow min-w-0">
+          <CardTitle className="text-sm font-medium truncate" title={name}>{name}</CardTitle>
+          <p className="text-xs text-muted-foreground">
+            {type?.toUpperCase()} - {resource.size}
+          </p>
         </div>
-      </CardHeader>
-      <CardContent className="p-4 pt-0">
-        {/* Optional: Add more details like date/size here */} 
-      </CardContent>
-      <CardFooter className="p-4 pt-0 flex justify-between items-center">
+      </div>
+      <div className="flex items-center gap-2 flex-shrink-0">
         {renderStatus()}
-        {/* Add action buttons (e.g., delete, retry) */} 
-        <div>
-          {status === 'failed' && onRetry && (
-             <Button variant="ghost" size="sm" onClick={() => onRetry(id)}>Retry</Button>
-          )}
-          {onDelete && (
-            <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive" onClick={() => onDelete(id)}>Delete</Button>
-          )}
-        </div>
-      </CardFooter>
-    </Card>
+        <Button variant="outline" size="sm" disabled title="Add to Folder (Not Implemented)">
+          <FolderPlus className="h-4 w-4 mr-1" /> Add to Folder
+        </Button>
+        <Button variant="ghost" size="icon" className="text-destructive hover:bg-destructive/10" disabled title="Delete (Not Implemented)">
+            <Trash2 className="h-4 w-4" />
+            <span className="sr-only">Delete Resource</span>
+        </Button>
+      </div>
+    </div>
   );
 }; 

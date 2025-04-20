@@ -1,3 +1,5 @@
+"use client"; // Added directive
+
 import { useState, useCallback } from 'react';
 import { Resource } from '../types'; // Assuming you might add the new resource optimistically
 

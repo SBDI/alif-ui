@@ -23,7 +23,7 @@ export default function DashboardHome() {
       </div>
 
       <div className="mb-8">
-        <Link href="/dashboard/chat">
+        <Link href="/folders/1/chat">
           <Card className="border-dashed hover:border-solid hover:border-primary/50 transition-all cursor-pointer">
             <CardContent className="p-6 flex items-center gap-3">
               <MessageSquare className="h-5 w-5 text-primary" />
@@ -101,27 +101,6 @@ export default function DashboardHome() {
             </Card>
           </Link>
         </div>
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-xl font-medium mb-4">Notes</h2>
-        <form
-          className="w-full"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const input = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
-            if (input.value.trim()) {
-              // Navigate to chat with the query
-              router.push(`/dashboard/chat?q=${encodeURIComponent(input.value.trim())}`);
-            }
-          }}
-        >
-          <Input
-            name="query"
-            className="w-full py-6 px-4 rounded-full"
-            placeholder="Ask Alif anything..."
-          />
-        </form>
       </div>
     </div>
   )
