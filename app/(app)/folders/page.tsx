@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 export default function FoldersPage() {
   return (
     <div className="space-y-6">
-      <Breadcrumbs items={[
+      {/* <Breadcrumbs items={[
         { label: "Dashboard", href: "/dashboard" },
         { label: "Folders", href: "/folders" }
-      ]} />
+      ]} /> */}
       <h1 className="text-2xl font-bold">Your Folders</h1>
       <FolderList />
     </div>

@@ -25,12 +25,14 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Breadcrumb, type BreadcrumbItem } from '@/components/shared/Breadcrumb';
 
 interface AppHeaderProps {
   onOpenCommandMenu?: () => void;
+  breadcrumbItems?: BreadcrumbItem[];
 }
 
-export function AppHeader({ onOpenCommandMenu }: AppHeaderProps) {
+export function AppHeader({ onOpenCommandMenu, breadcrumbItems }: AppHeaderProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
@@ -43,12 +45,14 @@ export function AppHeader({ onOpenCommandMenu }: AppHeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6">
-      <div className="w-1/4 flex items-center">
-        {/* Left section - can be used for logo or other elements */}
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6 w-full">
+      <div className="flex-shrink-0 min-w-0 pr-4">
+        {breadcrumbItems && breadcrumbItems.length > 0 && (
+          <Breadcrumb items={breadcrumbItems} />
+        )}
       </div>
 
-      <form onSubmit={handleSearch} className="flex-1 flex justify-center">
+      <form onSubmit={handleSearch} className="flex-grow flex justify-center px-4">
         <div className="relative w-full max-w-md">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -64,7 +68,7 @@ export function AppHeader({ onOpenCommandMenu }: AppHeaderProps) {
         </div>
       </form>
 
-      <div className="w-1/4 flex items-center justify-end gap-4">
+      <div className="flex-shrink-0 flex items-center justify-end gap-2 pl-4">
         <Button
           variant="outline"
           size="sm"

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+// import { Breadcrumbs } from "@/components/layout/Breadcrumbs"; // Removed
 import { FolderView } from "@/components/folders/FolderView";
 
 export const metadata: Metadata = {
@@ -7,14 +7,12 @@ export const metadata: Metadata = {
   description: "View folder contents",
 };
 
-export default function FolderPage({ params }: { params: { folderId: string } }) {
+export default async function FolderPage(props: { params: { folderId: string } }) {
+  const params = await props.params;
   return (
     <div className="space-y-6">
-      <Breadcrumbs items={[
-        { label: "Dashboard", href: "/dashboard" },
-        { label: "Folders", href: "/folders" },
-        { label: "Folder", href: `/folders/${params.folderId}` }
-      ]} />
+      {/* <Breadcrumbs items={[...]} /> */}
+      {/* Removed Breadcrumbs component rendering */}
       <FolderView folderId={params.folderId} />
     </div>
   );

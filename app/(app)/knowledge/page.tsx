@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 export default function KnowledgePage() {
   return (
     <div className="space-y-6">
-      <Breadcrumbs items={[
+      {/* <Breadcrumbs items={[
         { label: "Dashboard", href: "/dashboard" },
         { label: "Knowledge", href: "/knowledge" }
-      ]} />
+      ]} /> */}
       <h1 className="text-2xl font-bold">Knowledge Base</h1>
       <KnowledgeBaseView />
     </div>

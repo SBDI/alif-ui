@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useResourceUpload } from "@/components/features/resources/hooks/useResourceUpload";
+// import { useResourceUpload } from "@/components/features/resources/hooks/useResourceUpload";
 
 interface UploadKnowledgeModalProps {
   isOpen: boolean;
@@ -14,7 +14,15 @@ interface UploadKnowledgeModalProps {
 
 export function UploadKnowledgeModal({ isOpen, onClose }: UploadKnowledgeModalProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const { uploadResource, isUploading } = useResourceUpload();
+  // const { uploadResource, isUploading } = useResourceUpload();
+  // Placeholder for upload functionality
+  const isUploading = false; 
+  const uploadResource = async (file: File) => {
+    console.log("Mock upload:", file.name);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000)); 
+    // In a real scenario, you'd handle success/error here
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {

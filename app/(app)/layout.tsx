@@ -1,10 +1,67 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { usePathname, useParams } from 'next/navigation';
 import { Sidebar } from "@/components/layout/Sidebar";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { CommandMenu } from "@/components/shared/CommandMenu";
 import { cn } from "@/lib/utils";
+import type { BreadcrumbItem } from "@/components/shared/Breadcrumb";
+
+// Mock function to get folder name - replace with actual data fetching or context
+async function getFolderName(folderId: string): Promise<string> {
+  // In a real app, you would fetch this from your data source
+  const MOCK_FOLDER_NAMES: { [key: string]: string } = {
+    '1': 'Mathematics',
+    '2': 'Science Project',
+    'default-folder': 'Default Folder' 
+    // Add other folder IDs and names as needed
+  };
+  return MOCK_FOLDER_NAMES[folderId] || "Folder";
+}
+
+// Function to generate breadcrumb items
+// This will need to be more robust in a real app, potentially async if fetching names
+const generateBreadcrumbItems = (
+  pathname: string,
+  params: { folderId?: string; toolName?: string; [key: string]: string | undefined } // Adjust params type as needed
+): BreadcrumbItem[] => {
+  const items: BreadcrumbItem[] = [];
+  items.push({ label: "Dashboard", href: "/dashboard" });
+
+  if (pathname.startsWith('/folders')) {
+    items.push({ label: "Folders", href: "/folders" });
+    if (params.folderId) {
+      // For the folder name, ideally, you'd fetch it or have it available
+      // Using a placeholder or the ID for now.
+      // This part would ideally be async or use pre-fetched data for better UX.
+      items.push({ label: params.folderId, href: `/folders/${params.folderId}` });
+      
+      // Infer tool name from pathname segments after folderId
+      const segments = pathname.split('/');
+      const folderIdIndex = segments.indexOf(params.folderId);
+      if (folderIdIndex !== -1 && segments.length > folderIdIndex + 1) {
+        const toolSegment = segments[folderIdIndex + 1];
+        if (toolSegment && !["edit", "settings"].includes(toolSegment)) { // Avoid generic segments like 'edit'
+            const toolName = toolSegment.charAt(0).toUpperCase() + toolSegment.slice(1).replace('-', ' ');
+            items.push({ label: toolName, href: `/folders/${params.folderId}/${toolSegment}` });
+        }
+      }
+    }
+  } else if (pathname.startsWith('/knowledge')) {
+    items.push({ label: "Knowledge", href: "/knowledge" });
+  } else if (pathname.startsWith('/history')) {
+    items.push({ label: "History", href: "/history" });
+  } else if (pathname.startsWith('/settings')) {
+    items.push({ label: "Settings", href: "/settings" });
+    // Further nesting for settings can be added here
+    if (pathname.includes('/profile')) items.push({label: "Profile", href: "/settings/profile"});
+    if (pathname.includes('/billing')) items.push({label: "Billing", href: "/settings/billing"});
+  }
+  // Add more conditions for other sections like /knowledge, /history, /settings
+
+  return items;
+};
 
 export default function AppLayout({
   children,
@@ -13,27 +70,36 @@ export default function AppLayout({
 }) {
   const [commandMenuOpen, setCommandMenuOpen] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
+  const pathname = usePathname();
+  const params = useParams() as { folderId?: string; [key: string]: string | undefined }; // Cast params
 
-  // Callback for Sidebar to update this layout's state
+  // Use useMemo to avoid re-calculating breadcrumbs on every render unless pathname/params change
+  const breadcrumbItems = useMemo(() => 
+    generateBreadcrumbItems(pathname, params), 
+    [pathname, params]
+  );
+
   const handleSidebarToggle = (isExpanded: boolean) => {
     setSidebarExpanded(isExpanded);
   };
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
-      {/* Pass the state and toggle function to Sidebar */}
       <Sidebar expanded={sidebarExpanded} onToggle={handleSidebarToggle} />
-
-      {/* Apply margin-left based on the state managed here */}
       <div className={cn(
           "flex flex-col flex-1 overflow-hidden transition-all duration-300 ease-in-out",
-          sidebarExpanded ? "md:ml-64" : "md:ml-16" // Apply margin matching sidebar width
+          sidebarExpanded ? "md:ml-64" : "md:ml-16"
       )}>
-        <AppHeader onOpenCommandMenu={() => setCommandMenuOpen(true)} />
+        <AppHeader 
+          onOpenCommandMenu={() => setCommandMenuOpen(true)} 
+          breadcrumbItems={breadcrumbItems} // Pass generated items
+        />
         <main className={cn(
-          "flex-1 overflow-y-auto pt-16",
+          "flex-1 overflow-y-auto", 
+          // "pt-16" // Original AppLayout had pt-16 for main, this might need adjustment if AppHeader is fixed height
         )}>
-          <div className="container mx-auto py-6 px-4 md:px-6">
+          {/* Container for page content - ensure this doesn't duplicate another container if pages have their own */}
+          <div className="py-6 px-4 md:px-6">
             {children}
           </div>
         </main>

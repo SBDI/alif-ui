@@ -1,6 +1,5 @@
 import { Metadata } from "next";
-import { Breadcrumb } from "@/components/shared/Breadcrumb";
-import { WriteContainer } from "@/features/write/WriteContainer"; // Will be created in Task 2
+import { WriteContainer } from "@/features/write/WriteContainer";
 
 export const metadata: Metadata = {
   title: "Write | Alif",
@@ -9,15 +8,6 @@ export const metadata: Metadata = {
 
 export default function WritePage({ params }: { params: { folderId: string } }) {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Breadcrumb
-        items={[
-          { label: "Folders", href: "/folders" },
-          { label: "Folder", href: `/folders/${params.folderId}` },
-          { label: "Write", href: `/folders/${params.folderId}/write` }
-        ]}
-      />
-      <WriteContainer folderId={params.folderId} />
-    </div>
+    <WriteContainer folderId={params.folderId} />
   );
 } 

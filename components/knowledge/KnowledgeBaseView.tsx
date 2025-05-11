@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ResourceItemDisplay } from "@/components/features/resources/components/ResourceItemDisplay";
+import { ResourceItemDisplay } from "@/features/resources/components/ResourceItemDisplay";
 import { UploadKnowledgeModal } from "@/components/shared/UploadKnowledgeModal";
 import { Plus } from 'lucide-react';
 import { type Resource } from '@/lib/types/resource';
