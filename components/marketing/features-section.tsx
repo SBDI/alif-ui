@@ -21,7 +21,7 @@ export default function Features() {
                         </CardHeader>
 
                         <CardContent>
-                            <p className="text-sm">Generate practice quizzes from your notes, textbooks, or any resource in seconds.</p>
+                            <p className="text-sm">Generate quizzes from your notes, textbooks, or any resource in seconds.</p>
                         </CardContent>
                     </Card>
 

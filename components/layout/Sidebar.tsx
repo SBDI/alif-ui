@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import {
@@ -47,7 +47,7 @@ const mainNavItems = [
 const toolItems = [
   { name: 'Chat', href: '/chat', icon: MessageSquare },
   { name: 'Study Guide', href: '/study-guide', icon: BookOpen },
-  { name: 'Practice Quiz', href: '/practice-quiz', icon: FlaskConical },
+  { name: 'Quiz', href: '/quiz', icon: FlaskConical },
   { name: 'Flashcards', href: '/flashcards', icon: FileText },
   { name: 'Solve', href: '/solve', icon: PenLine },
   { name: 'Write', href: '/write', icon: Lightbulb },
@@ -60,7 +60,13 @@ interface SidebarProps {
 
 export function Sidebar({ expanded, onToggle }: SidebarProps) { // Use props
   const pathname = usePathname();
+  const router = useRouter();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
+  // Function to handle chat creation with dynamic ID
+  const handleChat = (folderId: string) => {
+    router.push(`/folders/${folderId}/chat`);
+  };
 
   // Refined active check: exact match for main items, startsWith for folder parent
   const isActive = (path: string, isFolderParent = false) => {
@@ -171,19 +177,34 @@ export function Sidebar({ expanded, onToggle }: SidebarProps) { // Use props
                      )}
                     </div>
               <CollapsibleContent className={cn("pl-6 space-y-1 mt-1", !expanded && "hidden")} >
-                    {toolItems.map((tool) => (
+                    {/* Special case for Chat tool with dynamic ID */}
+                    <button
+                      onClick={() => handleChat(folder.id)}
+                      className={cn(
+                        "flex items-center p-2 pl-3 rounded-md text-sm transition-colors w-full text-left",
+                        isActive(`/folders/${folder.id}/chat`) && pathname.includes('/chat')
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      )}
+                    >
+                      <MessageSquare className="h-4 w-4 mr-2 flex-shrink-0" />
+                      <span className="truncate whitespace-nowrap">Chat</span>
+                    </button>
+                    
+                    {/* Other tools (study-guide, quiz, etc.) */}
+                    {toolItems.filter(tool => tool.name !== 'Chat').map((tool) => (
                       <Link
                         key={tool.href}
-                    href={`/folders/${folder.id}${tool.href}`}
+                        href={`/folders/${folder.id}${tool.href}`}
                         className={cn(
-                      "flex items-center p-2 pl-3 rounded-md text-sm transition-colors", // Indent tool links
-                      isActive(`/folders/${folder.id}${tool.href}`)
+                          "flex items-center p-2 pl-3 rounded-md text-sm transition-colors",
+                          isActive(`/folders/${folder.id}${tool.href}`)
                             ? "bg-primary/10 text-primary"
                             : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         )}
                       >
-                    <tool.icon className="h-4 w-4 mr-2 flex-shrink-0" />
-                    <span className="truncate whitespace-nowrap">{tool.name}</span>
+                        <tool.icon className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <span className="truncate whitespace-nowrap">{tool.name}</span>
                       </Link>
                     ))}
                   </CollapsibleContent>

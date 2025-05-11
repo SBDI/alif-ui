@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import { useResourceUpload } from '@/features/resources/hooks/useResourceUpload';
+import { useResourceUpload } from '@/components/features/resources/hooks/useResourceUpload';
 import { UploadCloud, Link as LinkIcon, Database, AlertCircle, CheckCircle, X } from 'lucide-react';
 
 interface AddResourceModalProps {

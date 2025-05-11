@@ -5,16 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useSolve } from "./hooks/useSolve";
+import { useSolve } from "@/hooks/useSolve";
 
 interface SolveContainerProps {
   folderId: string;
+  activityId?: string;
 }
 
-export function SolveContainer({ folderId }: SolveContainerProps) {
+export function SolveContainer({ folderId, activityId }: SolveContainerProps) {
   const [problem, setProblem] = useState("");
   const [activeTab, setActiveTab] = useState<"text" | "image">("text");
-  const { solution, generateSolution, isLoading, error } = useSolve(folderId);
+  const { solution, generateSolution, isLoading, error } = useSolve(folderId, activityId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,9 +35,9 @@ export function SolveContainer({ folderId }: SolveContainerProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Solve Problems</h1>
+      <h1 className="text-2xl font-bold">Solve</h1>
       <p className="text-muted-foreground">
-        Get step-by-step solutions to your problems using AI.
+        Get step-by-step solutions to problems in your resources.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -64,8 +65,8 @@ export function SolveContainer({ folderId }: SolveContainerProps) {
                     <input
                       type="file"
                       id="image-upload"
-                      accept="image/*"
                       className="hidden"
+                      accept="image/*"
                       onChange={handleImageUpload}
                     />
                     <label

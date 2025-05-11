@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,16 +7,17 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useStudyGuide } from "./hooks/useStudyGuide";
+import { useStudyGuide } from "@/hooks/useStudyGuide";
 
 interface StudyGuideContainerProps {
   folderId: string;
+  activityId?: string;
 }
 
-export function StudyGuideContainer({ folderId }: StudyGuideContainerProps) {
+export function StudyGuideContainer({ folderId, activityId }: StudyGuideContainerProps) {
   const [topics, setTopics] = useState("");
   const [format, setFormat] = useState<"outline" | "detailed" | "summary">("detailed");
-  const { generateGuide, content, isLoading, error } = useStudyGuide(folderId);
+  const { generateGuide, content, isLoading, error } = useStudyGuide(folderId, activityId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,7 +71,11 @@ export function StudyGuideContainer({ folderId }: StudyGuideContainerProps) {
                 </Select>
               </div>
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={isLoading}
+              >
                 {isLoading ? "Generating..." : "Generate Study Guide"}
               </Button>
             </form>

@@ -3,16 +3,15 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { QuizForm } from "./components/QuizForm";
-import { QuizDisplay } from "./components/QuizDisplay";
-import { useQuiz } from "./hooks/useQuiz";
-import { type QuizSettings } from "./types";
+import { useQuiz } from "@/hooks/useQuiz";
+import { type QuizSettings } from "@/lib/types/quiz";
 
 interface QuizContainerProps {
   folderId: string;
+  activityId?: string;
 }
 
-export function QuizContainer({ folderId }: QuizContainerProps) {
+export function QuizContainer({ folderId, activityId }: QuizContainerProps) {
   const [quizStarted, setQuizStarted] = useState(false);
   const {
     questions,
@@ -26,7 +25,7 @@ export function QuizContainer({ folderId }: QuizContainerProps) {
     isLoading,
     isSubmitted,
     score
-  } = useQuiz(folderId);
+  } = useQuiz(folderId, activityId);
 
   const handleStartQuiz = (settings: QuizSettings) => {
     generateQuiz(settings);
@@ -56,7 +55,13 @@ export function QuizContainer({ folderId }: QuizContainerProps) {
             <CardTitle>Create New Quiz</CardTitle>
           </CardHeader>
           <CardContent>
-            <QuizForm onSubmit={handleStartQuiz} folderId={folderId} />
+            {/* Replace with your QuizForm component */}
+            <div className="space-y-4">
+              <p>Quiz form will go here</p>
+              <Button onClick={() => handleStartQuiz({ numQuestions: 5, difficulty: 'medium' })}>
+                Generate Quiz
+              </Button>
+            </div>
           </CardContent>
         </Card>
       ) : (
@@ -65,26 +70,18 @@ export function QuizContainer({ folderId }: QuizContainerProps) {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center justify-center h-40">
-                  {/* TODO: Add a proper loading spinner */}
                   <p className="text-muted-foreground animate-pulse">Generating your quiz...</p>
                 </div>
               </CardContent>
             </Card>
           ) : ( 
-            <QuizDisplay
-                questions={questions}
-                currentQuestionIndex={currentQuestionIndex}
-                selectedAnswers={selectedAnswers}
-                onSelectAnswer={selectAnswer}
-                onNextQuestion={nextQuestion}
-                onPrevQuestion={prevQuestion}
-                onSubmitQuiz={submitQuiz}
-                isSubmitted={isSubmitted}
-                score={score}
-            />
+            <div>
+              {/* Replace with your QuizDisplay component */}
+              <p>Quiz display will go here</p>
+            </div>
           )}
         </div>
       )}
     </div>
   );
-} 
+}

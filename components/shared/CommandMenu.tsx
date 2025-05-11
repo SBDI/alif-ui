@@ -58,6 +58,10 @@ export function CommandMenu() {
     command();
   };
 
+  const handleChat = () => {
+    runCommand(() => router.push(`/folders/1/chat`));
+  };
+
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Type a command or search..." />
@@ -112,7 +116,7 @@ export function CommandMenu() {
         <CommandSeparator />
         <CommandGroup heading="Tools">
           <CommandItem
-            onSelect={() => runCommand(() => router.push(`/folders/1/chat`))}
+            onSelect={handleChat}
           >
             <MessageSquare className="mr-2 h-4 w-4" />
             <span>Chat</span>
@@ -124,10 +128,10 @@ export function CommandMenu() {
             <span>Study Guide</span>
           </CommandItem>
           <CommandItem
-            onSelect={() => runCommand(() => router.push(`/folders/1/practice-quiz`))}
+            onSelect={() => runCommand(() => router.push(`/folders/1/quiz`))}
           >
             <FlaskConical className="mr-2 h-4 w-4" />
-            <span>Practice Quiz</span>
+            <span>Quiz</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push(`/folders/1/flashcards`))}

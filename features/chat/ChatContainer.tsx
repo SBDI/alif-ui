@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import { useChat } from './hooks/useChat';
+import { useChat } from '@/hooks/useChat';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SendHorizonal, User, Bot, AlertCircle } from 'lucide-react';
@@ -10,10 +10,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface ChatContainerProps {
   folderId: string;
+  activityId?: string; // Optional to maintain backward compatibility
 }
 
-export function ChatContainer({ folderId }: ChatContainerProps) {
-  const { messages, input, isLoading, handleInputChange, handleSubmit } = useChat(folderId);
+export function ChatContainer({ folderId, activityId }: ChatContainerProps) {
+  // Pass activityId to useChat hook
+  const { messages, input, isLoading, handleInputChange, handleSubmit } = useChat(folderId, [], activityId);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom

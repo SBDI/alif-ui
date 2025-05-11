@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useResourceUpload } from "@/features/resources/hooks/useResourceUpload";
+import { useResourceUpload } from "@/components/features/resources/hooks/useResourceUpload";
 
 interface UploadKnowledgeModalProps {
   isOpen: boolean;

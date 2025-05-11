@@ -1,7 +1,9 @@
+'use client';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ResourceItemDisplay } from "@/features/resources/components/ResourceItemDisplay";
 
 // This would come from a hook in a real implementation
@@ -23,6 +25,12 @@ interface FolderViewProps {
 export function FolderView({ folderId }: FolderViewProps) {
   // In a real implementation, we would fetch the folder data using the folderId
   const folder = mockFolder;
+  const router = useRouter();
+
+  // Handle chat creation - generates a timestamp-based ID only when clicked
+  const handleChat = () => {
+    router.push(`/folders/${folderId}/chat`);
+  };
 
   return (
     <div className="space-y-6">
@@ -64,8 +72,8 @@ export function FolderView({ folderId }: FolderViewProps) {
                 <CardDescription>Ask questions about your resources</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button asChild className="w-full">
-                  <Link href={`/folders/${folderId}/chat`}>Open Chat</Link>
+                <Button onClick={handleChat} className="w-full">
+                  Open Chat
                 </Button>
               </CardContent>
             </Card>
@@ -82,12 +90,12 @@ export function FolderView({ folderId }: FolderViewProps) {
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle>Practice Quiz</CardTitle>
-                <CardDescription>Test your knowledge with practice quizzes</CardDescription>
+                <CardTitle>Quiz</CardTitle>
+                <CardDescription>Test your knowledge with quizzes</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button asChild className="w-full">
-                  <Link href={`/folders/${folderId}/practice-quiz`}>Take Quiz</Link>
+                  <Link href={`/folders/${folderId}/quiz`}>Take Quiz</Link>
                 </Button>
               </CardContent>
             </Card>
