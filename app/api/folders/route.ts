@@ -1,43 +1,85 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+import { z } from 'zod'
 
-// Mock data for development
-const mockFolders = [
-  { id: "1", name: "Mathematics", description: "Math study materials", resourceCount: 5 },
-  { id: "2", name: "Science", description: "Science study materials", resourceCount: 3 },
-  { id: "3", name: "History", description: "History study materials", resourceCount: 2 },
-];
+// Validation schema for folder creation
+const createFolderSchema = z.object({
+  name: z.string().min(1).max(255),
+  description: z.string().optional(),
+  parentId: z.string().uuid().optional(),
+})
 
 export async function GET() {
-  // In a real implementation, this would fetch folders from a database
-  return NextResponse.json(mockFolders);
-}
-
-export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    
-    // Validate request body
-    if (!body.name) {
-      return NextResponse.json(
-        { error: "Folder name is required" },
-        { status: 400 }
-      );
+    const supabase = createClient()
+
+    // Get user session
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+    if (sessionError || !session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // In a real implementation, this would create a folder in a database
-    const newFolder = {
-      id: Math.random().toString(36).substring(2, 9),
-      name: body.name,
-      description: body.description || "",
-      resourceCount: 0,
-    };
+    // Fetch folders for the user
+    const { data: folders, error } = await supabase
+      .from('folders')
+      .select('*')
+      .order('created_at', { ascending: false })
 
-    return NextResponse.json(newFolder);
+    if (error) {
+      console.error('Error fetching folders:', error)
+      return NextResponse.json({ error: 'Failed to fetch folders' }, { status: 500 })
+    }
+
+    return NextResponse.json(folders)
   } catch (error) {
-    console.error("Error creating folder:", error);
-    return NextResponse.json(
-      { error: "Failed to create folder" },
-      { status: 500 }
-    );
+    console.error('Error in GET /api/folders:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const supabase = createClient()
+
+    // Get user session
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+    if (sessionError || !session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Parse and validate request body
+    const body = await request.json()
+    const validationResult = createFolderSchema.safeParse(body)
+    
+    if (!validationResult.success) {
+      return NextResponse.json(
+        { error: 'Invalid request data', details: validationResult.error.format() },
+        { status: 400 }
+      )
+    }
+
+    const { name, description, parentId } = validationResult.data
+
+    // Create new folder
+    const { data: folder, error } = await supabase
+      .from('folders')
+      .insert({
+        name,
+        description,
+        parent_id: parentId,
+        user_id: session.user.id,
+      })
+      .select()
+      .single()
+
+    if (error) {
+      console.error('Error creating folder:', error)
+      return NextResponse.json({ error: 'Failed to create folder' }, { status: 500 })
+    }
+
+    return NextResponse.json(folder, { status: 201 })
+  } catch (error) {
+    console.error('Error in POST /api/folders:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
