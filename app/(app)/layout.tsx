@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { usePathname, useParams } from 'next/navigation';
+import { useState, useMemo, useEffect } from 'react';
+import { usePathname, useParams, useRouter } from 'next/navigation';
 import { Sidebar } from "@/components/layout/Sidebar";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { CommandMenu } from "@/components/shared/CommandMenu";
 import { cn } from "@/lib/utils";
 import type { BreadcrumbItem } from "@/components/shared/Breadcrumb";
+import { useAuth } from '@/lib/context/AuthContext'
 
 // Mock function to get folder name - replace with actual data fetching or context
 async function getFolderName(folderId: string): Promise<string> {
@@ -63,11 +64,32 @@ const generateBreadcrumbItems = (
   return items;
 };
 
-export default function AppLayout({
+export default function ProtectedLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
+  const { user, loading } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login')
+    }
+  }, [user, loading, router])
+
+  if (loading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      </div>
+    )
+  }
+
+  if (!user) {
+    return null
+  }
+
   const [commandMenuOpen, setCommandMenuOpen] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const pathname = usePathname();
